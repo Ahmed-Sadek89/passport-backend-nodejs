@@ -1,0 +1,24 @@
+{
+  "name": "sadek",
+  "version": "1.0.0",
+  "description": "backend for passport applicalion\u001b[D\u001b[D\u001b[t",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ahmed-Sadek89/passport-backend-nodejs.git"
+  },
+  "author": "Ahmed Sadek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ahmed-Sadek89/passport-backend-nodejs/issues"
+  },
+  "homepage": "https://github.com/Ahmed-Sadek89/passport-backend-nodejs#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.4.2",
+    "passport": "^0.6.0"
+  }
+}
