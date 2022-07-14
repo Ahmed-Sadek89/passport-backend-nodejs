@@ -15,10 +15,7 @@ app.use(cookieSession({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Credentials", "true")
-  next()
-})
+
 app.use(
   cors({
     origin: process.env.CLIENT_ORIGIN,
