@@ -1,26 +1,26 @@
-const googleLoginSuccess = (req, res) => {
+const LoginSuccess = (req, res) => {
     if (req.user) {
         res.status(200).json({
             success: true,
             message: "successfull",
             user: req.user,
-            cookies: req.cookies // OR JWT
+            //cookies: req.cookies // OR JWT
         });
     }
 }
 
-const googleLoginFailed =  (req, res) => {
+const LoginFailed =  (req, res) => {
     res.status(401).json({
         success: false,
         message: "failure",
     });
 }
 
-const googleLogout = (req, res) => {
+const Logout = (req, res) => {
     req.logout();
     res.redirect(process.env.CLIENT_HOME_URL);
 }
 
 module.exports = {
-    googleLoginSuccess, googleLoginFailed, googleLogout
+    LoginSuccess, LoginFailed, Logout
 }

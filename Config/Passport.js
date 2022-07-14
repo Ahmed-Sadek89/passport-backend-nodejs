@@ -1,4 +1,4 @@
-const User = require('../Model/User.model')
+const User = require('../Model/User.model');
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const GithubStrategy = require("passport-github2").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
@@ -7,12 +7,6 @@ require('dotenv').config()
 
 
 
-GITHUB_CLIENT_ID = "your id";
-GITHUB_CLIENT_SECRET = "your id";
-
-FACEBOOK_APP_ID = "your id";
-FACEBOOK_APP_SECRET = "your id";
-
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -20,7 +14,9 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
   User.findById(id).then((user) => {
       done(null, user);
-  });
+  }).catch(err => {
+    console.log(err.message);
+  })
 });
 
 passport.use(
@@ -28,21 +24,22 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "https://file-api-sadek.herokuapp.com/auth/google/callback",
+      //callbackURL: "/auth/google/callback", //FOR LOCALHOST
+      callbackURL: "https://file-api-sadek.herokuapp.com/auth/google/callback"
     },
     function (accessToken, refreshToken, profile, done) {
-      console.log(profile);
-      User.findOne({googleId: profile.id}).then((currentUser) => {
+      //console.log(profile);
+      User.findOne({userId: profile.id}).then((currentUser) => {
         if(currentUser){
             // already have this user
-            console.log('user is: ', currentUser);
+            console.log('this user is already exist');
             done(null, currentUser);
         } else {
             // if not, create user in our db
             new User({
-                googleId: profile.id,
+                userId: profile.id,
                 username: profile.displayName,
-                thumbnail: profile._json.picture
+                thumbnail: profile.photos[0].value
             }).save().then((newUser) => {
                 console.log('created new user: ', newUser);
                 done(null, newUser);
@@ -56,12 +53,30 @@ passport.use(
 passport.use(
   new GithubStrategy(
     {
-      clientID: GITHUB_CLIENT_ID,
-      clientSecret: GITHUB_CLIENT_SECRET,
-      callbackURL: "/auth/github/callback",
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: "https://file-api-sadek.herokuapp.com/auth/github/callback",
+      //callbackURL: "/auth/github/callback",
     },
     function (accessToken, refreshToken, profile, done) {
-      done(null, profile);
+      //console.log(profile);
+      User.findOne({userId: profile.id}).then((currentUser) => {
+        if(currentUser){
+            // already have this user
+            console.log('this user is already exist');
+            done(null, currentUser);
+        } else {
+            // if not, create user in our db
+            new User({
+                userId: profile.id,
+                username: profile.displayName,
+                thumbnail: profile.photos[0].value
+            }).save().then((newUser) => {
+                console.log('created new user: ', newUser);
+                done(null, newUser);
+            });
+        }
+    });
     }
   )
 );
@@ -69,12 +84,33 @@ passport.use(
 passport.use(
   new FacebookStrategy(
     {
-      clientID: FACEBOOK_APP_ID,
-      clientSecret: FACEBOOK_APP_SECRET,
-      callbackURL: "/auth/facebook/callback",
+      clientID: process.env.FACEBOOK_APP_ID,
+      clientSecret: process.env.FACEBOOK_APP_SECRET,
+      callbackURL: "https://file-api-sadek.herokuapp.com/auth/facebook/callback",
+      //callbackURL: "/auth/facebook/callback",
+      profileFields: ['id', 'displayName', 'photos', 'email']
+
     },
     function (accessToken, refreshToken, profile, done) {
-      done(null, profile);
+      console.log(profile)
+      
+      User.findOne({userId: profile.id}).then((currentUser) => {
+        if(currentUser){
+            // already have this user
+            console.log('this user is already exist');
+            done(null, currentUser);
+        } else {
+            // if not, create user in our db
+            new User({
+                userId: profile.id,
+                username: profile.displayName,
+                thumbnail: profile.photos[0].value
+            }).save().then((newUser) => {
+                console.log('created new user: ', newUser);
+                done(null, newUser);
+            });
+        }
+    });
     }
   )
 );
