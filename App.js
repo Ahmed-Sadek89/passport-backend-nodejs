@@ -12,9 +12,7 @@ require('dotenv').config()
 
 app.use(cookieSession({
   name: 'session',
-  maxAge: 24 * 60 * 60 * 1000,
-  keys: ['SESSION1', 'SESSION2']
-  
+  keys: ['SESSION1', 'SESSION2'],
 }));
 
 
