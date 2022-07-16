@@ -33,7 +33,7 @@ passport.use(
         if(currentUser){
             // already have this user
             console.log('this user is already exist');
-            done(null, currentUser);
+            return done(null, currentUser);
         } else {
             // if not, create user in our db
             new User({
@@ -42,7 +42,7 @@ passport.use(
                 thumbnail: profile.photos[0].value
             }).save().then((newUser) => {
                 console.log('created new user: ', newUser);
-                done(null, newUser);
+                return done(null, newUser);
             });
         }
     });
@@ -117,13 +117,13 @@ passport.use(
 
 passport.serializeUser(function(user, done){
   console.log('serializeUser ' , user);
-  done(null, user.id);
+  return done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done){
   User.findById(id, function(err, user){
       console.log('this is the f*cking user ', user);
-      done(err, user);
+      return done(err, user);
   });
 });
 // passport.deserializeUser((id, done) => {
