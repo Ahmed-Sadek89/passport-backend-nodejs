@@ -33,7 +33,7 @@ passport.use(
         if(currentUser){
             // already have this user
             console.log('this user is already exist');
-            window.localStorage.setItem("userId", currentUser.userId)
+            localStorage.setItem("userId", currentUser.userId)
             done(null, currentUser);
         } else {
             // if not, create user in our db
@@ -43,7 +43,7 @@ passport.use(
                 thumbnail: profile.photos[0].value
             }).save().then((newUser) => {
                 console.log('created new user: ', newUser);
-                window.localStorage.setItem("userId", newUser.userId)
+                localStorage.setItem("userId", newUser.userId)
                 done(null, newUser);
             });
         }
