@@ -4,7 +4,7 @@ const cookieSession = require("cookie-session");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require('mongoose');
-const passportSetup = require("./Config/Passport");
+// const passportSetup = require("./Config/Passport");
 const passport = require("passport");
 const authRoute = require("./Routes/Auth.route");
 const app = express();
@@ -18,7 +18,7 @@ app.use(cookieSession({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+require("./Config/Passport")(passport);
 
 app.all('/*', cors(), (req, res, next) => {
   next()
