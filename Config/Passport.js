@@ -115,17 +115,15 @@ passport.use(
 );
 
 
-passport.serializeUser((user, done) => {
-  done(null, user);
+passport.serializeUser(function(user, done){
+  done(null, user.id);
 });
 
-passport.deserializeUser((user, done) => {
-    User.find({userId: user.id}).then((user) => {
+passport.deserializeUser(function(id, done){
+  User.findById(id, function(err, user){
       console.log('this is the f*cking user ', user);
-      done(null, user);
-    }).catch(err => {
-      console.log(err.message);
-    })
+      done(err, user);
+  });
 });
 // passport.deserializeUser((id, done) => {
 //   User.findById(id).then((user) => {
