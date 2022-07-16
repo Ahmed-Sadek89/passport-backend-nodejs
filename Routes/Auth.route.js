@@ -15,14 +15,7 @@ router.get("/login/success", (req, res) => {
       success: true,
       message: "successfull",
       user: req.user,
-      //   cookies: req.cookies
-    });
-  }else {
-    res.status(200).json({
-      success: true,
-      message: "successfull",
-      userERR: 'req.user',
-      //   cookies: req.cookies
+      session: req.session
     });
   }
 });
