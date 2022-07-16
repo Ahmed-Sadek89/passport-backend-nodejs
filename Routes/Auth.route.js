@@ -12,7 +12,7 @@ router.get("/login/success", cors(), (req, res) => {
       success: true,
       message: "successfull",
       user: req.user,
-      //cookies: req.cookies // OR JWT
+      cookies: req.cookies // OR JWT
   });
 });
 
