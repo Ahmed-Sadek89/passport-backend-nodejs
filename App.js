@@ -13,13 +13,12 @@ require('dotenv').config()
 // app.use(
 //   cookieSession({ name: "session", keys: ["sadek"], maxAge: 24 * 60 * 60 * 100 })
 // );
-app.use(
-  session({
-  secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
-  resave: false, //required
-  saveUninitialized: false //required
-  })
-)
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: true }
+}))
 
 app.get('/', (req, res, next) => {
   req.session.user ='a7a'

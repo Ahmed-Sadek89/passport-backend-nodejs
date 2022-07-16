@@ -26,7 +26,6 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       //callbackURL: "/auth/google/callback", //FOR LOCALHOST
       callbackURL: "https://file-api-sadek.herokuapp.com/auth/google/callback",
-      
     },
     function (accessToken, refreshToken, profile, done) {
       console.log(profile);
