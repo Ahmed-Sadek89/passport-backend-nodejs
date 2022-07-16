@@ -20,8 +20,10 @@ const STORE  = new sessionStore({
 app.use(session({
   secret: 'sdkfjdhaisdjimckdsjejimcei',
   saveUninitialized: false,
+  
   cookie: {
     maxAge: 24 * 60 * 60 * 100,
+    httpOnly: true
   },
   store: STORE
 }))

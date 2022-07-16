@@ -2,7 +2,6 @@ const router = require("express").Router();
 const passport = require("passport");
 require('dotenv').config();
 const { LoginFailed, Logout} = require('../Controllers/Auth.controller')
-const cors = require('cors')
 const User = require('../Model/User.model');
 
 
