@@ -27,13 +27,9 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: CLIENT_URL,
-    failureRedirect: "/login/failed"
-  }, 
-    (req, res) => {
-      console.log('you logged in by google ', req.user);
-    }
-  )
+    failureRedirect: "/login/failed",
+    session: false
+  })
 );
 
 router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
