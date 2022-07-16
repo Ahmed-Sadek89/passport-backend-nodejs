@@ -13,7 +13,8 @@ router.get("/login/success", cors(), async (req, res) => {
     res.status(200).json({
       success: true,
       message: "successfull",
-      user: user,
+      user1: user,
+      user2: req.user,
       cookies: req.cookies // OR JWT
   });
 });
