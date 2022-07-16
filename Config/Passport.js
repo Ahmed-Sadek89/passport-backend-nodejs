@@ -24,8 +24,8 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback", //FOR LOCALHOST
-      //callbackURL: "https://file-api-sadek.herokuapp.com/auth/google/callback"
+      //callbackURL: "/auth/google/callback", //FOR LOCALHOST
+      callbackURL: "https://file-api-sadek.herokuapp.com/auth/google/callback"
     },
     function (accessToken, refreshToken, profile, done) {
       //console.log(profile);
@@ -55,7 +55,8 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "/auth/github/callback",
+      //callbackURL: "/auth/github/callback",
+      callbackURL: "https://file-api-sadek.herokuapp.com/auth/github/callback"
     },
     function (accessToken, refreshToken, profile, done) {
       //console.log(profile);
@@ -85,11 +86,9 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      
-      callbackURL: "/auth/facebook/callback",
+      callbackURL: "https://file-api-sadek.herokuapp.com/auth/facebook/callback",
+      //callbackURL: "/auth/facebook/callback",
       profileFields: ['id', 'displayName', 'photos', 'email']
-
-      //callbackURL: "https://file-api-sadek.herokuapp.com/auth/facebook/callback",
     },
     function (accessToken, refreshToken, profile, done) {
       console.log(profile)
