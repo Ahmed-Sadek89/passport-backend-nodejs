@@ -8,13 +8,12 @@ const User = require('../Model/User.model');
 
 const CLIENT_URL = process.env.CLIENT_HOME_URL;
 
-router.get("/login/success", cors(), async (req, res) => {
-    console.log(req.user);
-    const user = await User.find()
+router.get("/login/success", (req, res) => {
+    console.log('user is ',req.user);
+    
     res.status(200).json({
       success: true,
       message: "successfull",
-      user1: user,
       user2: req.user,
       cookies: req.cookies // OR JWT
   });
