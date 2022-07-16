@@ -13,19 +13,12 @@ router.get("/login/success", async (req, res) => {
   console.log('req.user ', req.user);
   console.log('req.session ', req.session);
   console.log('user from db ', thisUser);
-  if (req.session) {
+  
     res.status(200).json({
       success: true,
       message: "successfull",
       user: req.user,
       session: req.session
-      //   cookies: req.cookies
-    });
-  }else {
-    res.status(200).json({
-      success: true,
-      message: "successfull",
-      userERR: 'req.user',
       //   cookies: req.cookies
     });
   }
