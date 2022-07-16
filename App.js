@@ -11,7 +11,7 @@ require('dotenv').config()
 app.use(cookieSession({
   name: 'session',
   maxAge: 24 * 60 * 60 * 1000,
-  keys: [process.env.COOKIE_SESSION_KEY]
+  keys: ['SESSION1', 'SESSION2']
 }));
 
 app.use(passport.initialize());

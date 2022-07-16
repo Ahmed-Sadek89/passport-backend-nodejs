@@ -3,15 +3,17 @@ const passport = require("passport");
 require('dotenv').config();
 const { LoginFailed, Logout} = require('../Controllers/Auth.controller')
 const cors = require('cors')
+const User = require('../Model/User.model');
 
 
 const CLIENT_URL = process.env.CLIENT_HOME_URL;
 
-router.get("/login/success", cors(), (req, res) => {
+router.get("/login/success", cors(), async (req, res) => {
+    const user = await User.find()
     res.status(200).json({
       success: true,
       message: "successfull",
-      user: req.user,
+      user: user,
       cookies: req.cookies // OR JWT
   });
 });
