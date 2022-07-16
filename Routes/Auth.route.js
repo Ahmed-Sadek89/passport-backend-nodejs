@@ -9,6 +9,7 @@ const User = require('../Model/User.model');
 const CLIENT_URL = process.env.CLIENT_HOME_URL;
 
 router.get("/login/success", cors(), async (req, res) => {
+    console.log(req.user);
     const user = await User.find()
     res.status(200).json({
       success: true,
