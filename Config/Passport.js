@@ -121,4 +121,17 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((user, done) => {
   done(null, user);
+    User.find({userId: user.id}).then((user) => {
+      console.log('this is the f*cking user ', user);
+      done(null, user);
+  }).catch(err => {
+    console.log(err.message);
+  })
 });
+// passport.deserializeUser((id, done) => {
+//   User.findById(id).then((user) => {
+//       done(null, user);
+//   }).catch(err => {
+//     console.log(err.message);
+//   })
+// });
