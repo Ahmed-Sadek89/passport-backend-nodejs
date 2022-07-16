@@ -28,11 +28,12 @@ passport.use(
       callbackURL: "https://file-api-sadek.herokuapp.com/auth/google/callback"
     },
     function (accessToken, refreshToken, profile, done) {
-      //console.log(profile);
+      console.log(profile);
       User.findOne({userId: profile.id}).then((currentUser) => {
         if(currentUser){
             // already have this user
             console.log('this user is already exist');
+            window.localStorage.setItem("userId", currentUser.userId)
             done(null, currentUser);
         } else {
             // if not, create user in our db
@@ -42,6 +43,7 @@ passport.use(
                 thumbnail: profile.photos[0].value
             }).save().then((newUser) => {
                 console.log('created new user: ', newUser);
+                window.localStorage.setItem("userId", newUser.userId)
                 done(null, newUser);
             });
         }
