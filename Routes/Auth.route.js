@@ -9,10 +9,8 @@ const CLIENT_URL = process.env.CLIENT_HOME_URL;
 
 router.get("/login/success", async (req, res) => {
   // req.session = req.user
-  const thisUser = await User.findOne({_id: req.user._id})
   console.log('req.user ', req.user);
   console.log('req.session ', req.session);
-  console.log('user from db ', thisUser);
   
     res.status(200).json({
       success: true,

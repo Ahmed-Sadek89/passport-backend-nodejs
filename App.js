@@ -11,7 +11,7 @@ const app = express();
 require('dotenv').config()
 
 app.use(
-  cookieSession({ name: "session", keys: ["sadek"], maxAge: 24 * 60 * 60 * 100 })
+  cookieSession({ name: "session", keys: ["sadek"], maxAge: 24 * 60 * 60 * 100, httpOnly: true, secure: true })
 );
 
 app.use(passport.initialize());
