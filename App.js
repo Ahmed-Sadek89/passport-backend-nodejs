@@ -16,11 +16,14 @@ require('dotenv').config()
 app.use(
   session({
   secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+  resave: false, //required
+  saveUninitialized: false //required
   })
 )
 
 app.get('/', (req, res, next) => {
-  console.log('req.session ', req,session)
+  req.session.user ='a7a'
+  console.log('req.session ', req,session.user )
   next()
 })
 
