@@ -116,6 +116,7 @@ passport.use(
 
 
 passport.serializeUser(function(user, done){
+  console.log('serializeUser ' , user);
   done(null, user.id);
 });
 
