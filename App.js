@@ -17,12 +17,10 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', cors(), (req, res, next) => {
-  res.json({message: 'success,', auth: req.user})
-});
 
 
-app.use("/auth", authRoute);
+
+app.use("/auth", cors(),  authRoute);
 
 
 mongoose.connect(process.env.DB_CONNECT).then(() => {
