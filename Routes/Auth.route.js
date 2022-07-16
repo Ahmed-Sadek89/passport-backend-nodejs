@@ -29,7 +29,11 @@ router.get(
   passport.authenticate("google", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed"
-  })
+  }, 
+    (req, res) => {
+      console.log('you logged in by google ', req.user);
+    }
+  )
 );
 
 router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
