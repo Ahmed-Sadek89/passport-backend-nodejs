@@ -1,6 +1,6 @@
-const cookieSession = require("cookie-session");
-// const session = require('express-session')
-// const sessionStore = require('connect-mongodb-session')(session);
+// const cookieSession = require("cookie-session");
+const session = require('express-session')
+const sessionStore = require('connect-mongodb-session')(session);
 const express = require("express");
 const cors = require("cors");
 const mongoose = require('mongoose');
@@ -10,11 +10,21 @@ const authRoute = require("./Routes/Auth.route");
 const app = express();
 require('dotenv').config()
 
-app.use(
-  cookieSession({ name: "session", keys: ["sadek"], maxAge: 24 * 60 * 60 * 100 })
-);
-
-
+// app.use(
+//   cookieSession({ name: "session", keys: ["sadek"], maxAge: 24 * 60 * 60 * 100 })
+// );
+const STORE  = new sessionStore({
+  url: process.env.DB_CONNECT,
+  collection: 'sessions'
+})
+app.use(session({
+  secret: 'sdkfjdhaisdjimckdsjejimcei',
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 100,
+  },
+  store: STORE
+}))
 app.use(passport.initialize());
 app.use(passport.session());
 

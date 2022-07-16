@@ -9,13 +9,15 @@ const User = require('../Model/User.model');
 const CLIENT_URL = process.env.CLIENT_HOME_URL;
 
 router.get("/login/success", (req, res) => {
-  req.session = req.user
-  console.log(req.user);
-  if (req.user) {
+  // req.session = req.user
+  console.log('req.user ', req.user);
+  console.log('req.session ', req.session);
+  if (req.session) {
     res.status(200).json({
       success: true,
       message: "successfull",
-      user: req.session,
+      user: req.user,
+      session: req.session
       //   cookies: req.cookies
     });
   }else {
