@@ -19,7 +19,10 @@ app.use(
   })
 )
 
-app.get('/', (req, res) => console.log('req.session ', req,session))
+app.get('/', (req, res, next) => {
+  console.log('req.session ', req,session)
+  next()
+})
 
 app.use(passport.initialize());
 app.use(passport.session());
