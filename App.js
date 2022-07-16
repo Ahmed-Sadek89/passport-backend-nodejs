@@ -23,7 +23,7 @@ app.use(
 
 app.get('/', (req, res, next) => {
   req.session.user ='a7a'
-  console.log('req.session ', req,session.user )
+  console.log('req.session ', req.session )
   next()
 })
 
