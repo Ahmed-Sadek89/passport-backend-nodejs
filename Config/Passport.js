@@ -42,6 +42,7 @@ passport.use(
                 thumbnail: profile.photos[0].value
             }).save().then((newUser) => {
                 console.log('created new user: ', newUser);
+                
                 done(null, newUser);
             });
         }

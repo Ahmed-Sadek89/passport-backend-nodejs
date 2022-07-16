@@ -8,8 +8,8 @@ const authRoute = require("./Routes/Auth.route");
 const app = express();
 require('dotenv').config()
 
-
 app.use(cookieSession({
+  name: 'session',
   maxAge: 24 * 60 * 60 * 1000,
   keys: [process.env.COOKIE_SESSION_KEY]
 }));
