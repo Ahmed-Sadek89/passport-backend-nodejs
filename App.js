@@ -18,9 +18,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+app.all('/', cors(), (req, res) => {
+  res.status(200).json({message: 'success auth', auth: req.user})
+})
 
-
-app.use("/auth", cors(),  authRoute);
+app.use("/auth",  authRoute);
 
 
 mongoose.connect(process.env.DB_CONNECT).then(() => {
