@@ -18,7 +18,7 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN,
+    origin: ["https://passport-fronend-react.vercel.app", "http://localhost:3000"], // =>  https://passport-fronend-react.vercel.app/
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
