@@ -9,14 +9,15 @@ const User = require('../Model/User.model');
 const CLIENT_URL = process.env.CLIENT_HOME_URL;
 
 router.get("/login/success", (req, res) => {
-    console.log('user is ',req.user);
-    
+  console.log(req.user);
+  if (req.user) {
     res.status(200).json({
       success: true,
       message: "successfull",
-      user2: req.user,
-      cookies: req.cookies // OR JWT
-  });
+      user: req.user,
+      //   cookies: req.cookies
+    });
+  }
 });
 
 router.get("/login/failed", LoginFailed);
