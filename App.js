@@ -8,15 +8,13 @@ const authRoute = require("./Routes/Auth.route");
 const app = express();
 require('dotenv').config()
 
-// app.use(cookieSession({
-//   name: 'session',
-//   maxAge: 24 * 60 * 60 * 1000,
-//   keys: ['SESSION1', 'SESSION2']
-// }));
-app.use(express.cookieSession({secret:"HELLO", key:"sc", cookie:{
-  path: process.env.CLIENT_HOME_URL, 
-  httpOnly: true
-} }));
+app.use(cookieSession({
+  name: 'session',
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: ['SESSION1', 'SESSION2']
+  
+}));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
