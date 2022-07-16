@@ -1,5 +1,5 @@
-// const cookieSession = require("cookie-session");
-const session = require('express-session')
+const cookieSession = require("cookie-session");
+// const session = require('express-session')
 // const sessionStore = require('connect-mongodb-session')(session);
 const express = require("express");
 const cors = require("cors");
@@ -10,25 +10,14 @@ const authRoute = require("./Routes/Auth.route");
 const app = express();
 require('dotenv').config()
 
-// app.use(
-//   cookieSession({ name: "session", keys: ["sadek"], maxAge: 24 * 60 * 60 * 100 })
-// );
+app.use(
+  cookieSession({ name: "session", keys: ["sadek"], maxAge: 24 * 60 * 60 * 100 })
+);
 
-
-app.get('/', (req, res, next) => {
-  req.session.user ='a7a'
-  console.log('req.session ', req.session )
-  next()
-})
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: true }
-}))
+
 app.use(
   cors({
     origin: "https://passport-fronend-react.vercel.app",

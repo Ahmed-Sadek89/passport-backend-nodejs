@@ -7,17 +7,17 @@ require('dotenv').config()
 
 
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user);
+// });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
-      done(null, user);
-  }).catch(err => {
-    console.log(err.message);
-  })
-});
+// passport.deserializeUser((id, done) => {
+//   User.findById(id).then((user) => {
+//       done(null, user);
+//   }).catch(err => {
+//     console.log(err.message);
+//   })
+// });
 
 passport.use(
   new GoogleStrategy(
@@ -114,3 +114,11 @@ passport.use(
   )
 );
 
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
