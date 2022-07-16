@@ -13,6 +13,13 @@ require('dotenv').config()
 app.use(
   cookieSession({ name: "session", keys: ["sadek"], maxAge: 24 * 60 * 60 * 100 })
 );
+app.use(
+  session({
+  secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+  })
+)
+
+app.get('/', (req, res) => console.log('req.session ', req,session))
 
 app.use(passport.initialize());
 app.use(passport.session());
