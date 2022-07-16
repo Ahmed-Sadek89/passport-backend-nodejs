@@ -21,7 +21,7 @@ router.get("/login/success", async (req, res) => {
       session: req.session
       //   cookies: req.cookies
     });
-  }
+ 
 });
 
 router.get("/login/failed", LoginFailed);
