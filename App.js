@@ -1,5 +1,5 @@
-const cookieSession = require("cookie-session");
-// const session = require('express-session')
+// const cookieSession = require("cookie-session");
+const session = require('express-session')
 // const sessionStore = require('connect-mongodb-session')(session);
 const express = require("express");
 const cors = require("cors");
@@ -10,9 +10,9 @@ const authRoute = require("./Routes/Auth.route");
 const app = express();
 require('dotenv').config()
 
-app.use(
-  cookieSession({ name: "session", keys: ["sadek"], maxAge: 24 * 60 * 60 * 100 })
-);
+// app.use(
+//   cookieSession({ name: "session", keys: ["sadek"], maxAge: 24 * 60 * 60 * 100 })
+// );
 app.use(
   session({
   secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
