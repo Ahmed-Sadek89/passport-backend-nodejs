@@ -18,10 +18,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', cors(), (req, res, next) => {
-  res.json({message: 'success'})
-});
-app.use('/*', cors(), (req, res, next) => {
-  res.json({message: 'success auth'})
+  res.json({message: 'success,', auth: req.user})
 });
 
 
