@@ -10,14 +10,12 @@ const CLIENT_URL = process.env.CLIENT_HOME_URL;
 
 router.get("/login/success", (req, res) => {
   console.log(req.user);
-  if (req.user) {
     res.status(200).json({
       success: true,
       message: "successfull",
       user: req.user,
       session: req.session
     });
-  }
 });
 
 router.get("/login/failed", LoginFailed);
