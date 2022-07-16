@@ -7,26 +7,17 @@ require('dotenv').config()
 
 
 
-passport.serializeUser((user, done) => {
-	console.log('=== serialize ... called ===')
-	console.log(user) // the whole raw user object!
-	console.log('---------')
-	done(null, { _id: user._id })
-})
+// passport.serializeUser((user, done) => {
+//   done(null, user);
+// });
 
-passport.deserializeUser((id, done) => {
-	console.log('DEserialize ... called')
-	User.findOne(
-		{ _id: id },
-		'firstName lastName photos local.username',
-		(err, user) => {
-			console.log('======= DESERILAIZE USER CALLED ======')
-			console.log(user)
-			console.log('--------------')
-			done(null, user)
-		}
-	)
-})
+// passport.deserializeUser((id, done) => {
+//   User.findById(id).then((user) => {
+//       done(null, user);
+//   }).catch(err => {
+//     console.log(err.message);
+//   })
+// });
 
 passport.use(
   new GoogleStrategy(
@@ -123,18 +114,26 @@ passport.use(
   )
 );
 
+passport.serializeUser((user, done) => {
+	console.log('=== serialize ... called ===')
+	console.log(user) // the whole raw user object!
+	console.log('---------')
+	done(null, { _id: user._id })
+})
 
-// passport.serializeUser(function(user, done){
-//   console.log('serializeUser ' , user);
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser(function(id, done){
-//   User.findById(id, function(err, user){
-//       console.log('this is the f*cking user ', user);
-//       done(err, user);
-//   });
-// });
+passport.deserializeUser((id, done) => {
+	console.log('DEserialize ... called')
+	User.findOne(
+		{ _id: id },
+		'firstName lastName photos local.username',
+		(err, user) => {
+			console.log('======= DESERILAIZE USER CALLED ======')
+			console.log(user)
+			console.log('--------------')
+			done(null, user)
+		}
+	)
+})
 // passport.deserializeUser((id, done) => {
 //   User.findById(id).then((user) => {
 //       done(null, user);
