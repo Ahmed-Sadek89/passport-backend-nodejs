@@ -19,9 +19,7 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.all('/*', cors(), (req, res, next) => {
-  next()
-})
+app.use(cors({credentials: true}))
 
 app.use("/auth", authRoute);
 
