@@ -1,13 +1,29 @@
 const router = require("express").Router();
 const passport = require("passport");
 require('dotenv').config();
-const {LoginSuccess, LoginFailed, Logout} = require('../Controllers/Auth.controller')
+const { LoginFailed, Logout} = require('../Controllers/Auth.controller')
 const cors = require('cors')
 
 
 const CLIENT_URL = process.env.CLIENT_HOME_URL;
 
-router.get("/login/success", cors() ,LoginSuccess);
+router.get("/login/success", cors(), (req, res) => {
+  if (req.user) {
+      res.status(200).json({
+          success: true,
+          message: "successfull",
+          user: req.user,
+          //cookies: req.cookies // OR JWT
+      });
+  }else {
+    res.status(200).json({
+      success: true,
+      message: "successfull",
+      user: 'no user',
+      //cookies: req.cookies // OR JWT
+  });
+  }
+});
 
 router.get("/login/failed", LoginFailed);
 
