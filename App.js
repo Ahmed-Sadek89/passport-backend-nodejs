@@ -7,7 +7,15 @@ const authRoute = require("./Routes/Auth.route");
 const app = express();
 require('dotenv').config()
 app.use(
-  cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
+  cookieSession({ 
+    name: "session", 
+    keys: ["lama"], 
+    maxAge: 24 * 60 * 60 * 100,  
+    httpOnly: true,
+    secure: true,
+    secret: "saaasda",
+    secureProxy: true
+  })
 );
 
 app.use(passport.initialize());
@@ -15,7 +23,7 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: "*",
+    origin: "https://passport-fronend-react.vercel.app",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
