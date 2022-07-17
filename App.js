@@ -14,7 +14,11 @@ app.use(
     httpOnly: true,
     secure: true,
     secret: "saaasda",
-    secureProxy: true
+    cookie: {
+      maxAge: 24 * 60 * 60 * 100,  
+      httpOnly: true,
+      secure: true,
+    }
   })
 );
 
@@ -23,7 +27,7 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: "https://passport-fronend-react.vercel.app",
+    origin: "https://file-api-sadek.herokuapp.com",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })

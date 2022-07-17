@@ -2,12 +2,13 @@ const router = require("express").Router();
 const passport = require("passport");
 
 
-const CLIENT_URL = "https://passport-fronend-react.vercel.app/";
+const CLIENT_URL = "http://localhost:3000/";
 
 router.get("/login/success", (req, res) => {
-  if (req.user) {
+  console.log(req.isAuthenticated());
+  if (req.isAuthenticated()) {
     res.status(200).json({
-      success: true,
+      isAuthenticated: req.isAuthenticated(),
       message: "successfull",
       user: req.user,
       //   cookies: req.cookies
@@ -23,6 +24,7 @@ router.get("/login/failed", (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
+  console.log(req.isAuthenticated());
   req.logout();
   res.redirect(CLIENT_URL);
 });
