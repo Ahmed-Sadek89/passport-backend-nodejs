@@ -10,15 +10,7 @@ app.use(
   cookieSession({ 
     name: "session", 
     keys: ["lama"], 
-    maxAge: 24 * 60 * 60 * 100,  
-    httpOnly: true,
-    secure: true,
-    secret: "saaasda",
-    cookie: {
-      maxAge: 24 * 60 * 60 * 100,  
-      httpOnly: true,
-      secure: true,
-    }
+    maxAge: 24 * 60 * 60 * 100, 
   })
 );
 
