@@ -19,7 +19,7 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: "https://file-api-sadek.herokuapp.com",
+    origin: "*",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
