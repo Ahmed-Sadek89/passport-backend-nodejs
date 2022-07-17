@@ -1,9 +1,8 @@
 const router = require("express").Router();
 const passport = require("passport");
-require('dotenv').config();
 
 
-const CLIENT_URL = process.env.CLIENT_HOME_URL;
+const CLIENT_URL = "https://passport-fronend-react.vercel.app/";
 
 router.get("/login/success", (req, res) => {
   if (req.user) {
