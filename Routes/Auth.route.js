@@ -5,7 +5,7 @@ const passport = require("passport");
 const CLIENT_URL = "https://passport-fronend-react.vercel.app/";
 
 router.get("/login/success", (req, res) => {
-  console.log(req.isAuthenticated());
+  console.log("/login/success ",req);
   if (req.isAuthenticated()) {
     res.status(200).json({
       isAuthenticated: req.isAuthenticated(),
