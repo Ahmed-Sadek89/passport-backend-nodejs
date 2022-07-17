@@ -1,4 +1,6 @@
-const cookieSession = require("cookie-session");
+// const cookieSession = require("cookie-session");
+const cookieParser = require('cookie-parser');
+const expressSession = require('express-session');
 const express = require("express");
 const cors = require("cors");
 const passportSetup = require("./Config/Passport");
@@ -6,26 +8,28 @@ const passport = require("passport");
 const authRoute = require("./Routes/Auth.route");
 const app = express();
 require('dotenv').config()
-app.use(
-  cookieSession({ 
-    name: "session", 
-    keys: ["lama"], 
-    maxAge: 24 * 60 * 60 * 100, 
-  })
-);
-
+// app.use(
+//   cookieSession({ 
+//     name: "session", 
+//     keys: ["lama"], 
+//     maxAge: 24 * 60 * 60 * 100, 
+//   })
+// );
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(
-  cors({
-    origin: "*",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
+  cors()
 );
 
-app.use("/auth",cors(),  authRoute);
+app.use("/auth", authRoute);
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
