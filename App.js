@@ -11,7 +11,11 @@ require('dotenv').config()
 
 
 app.use(
-  cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100, secure: true })
+  cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100,
+  cookie: {
+    secure: true
+  }
+})
 );
 
 
