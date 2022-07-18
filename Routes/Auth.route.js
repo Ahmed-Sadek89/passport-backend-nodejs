@@ -2,7 +2,7 @@ const router = require("express").Router();
 const passport = require("passport");
 const User = require('../Model/User.model')
 
-const CLIENT_URL = "https://file-api-sadek.herokuapp.com/";
+const CLIENT_URL = "https://passport-fronend-react.vercel.app/";
 
 router.get("/login/success", async (req, res) => {
   const user = await User.find().sort({date: -1}).limit(1)
