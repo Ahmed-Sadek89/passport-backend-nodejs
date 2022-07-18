@@ -20,7 +20,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      //callbackURL: "/auth/google/callback",
+      // callbackURL: "/auth/google/callback",
       callbackURL: "https://file-api-sadek.herokuapp.com/auth/google/callback"
     },
     function (accessToken, refreshToken, profile, done) {
@@ -102,11 +102,11 @@ passport.use(
     {
       clientID: FACEBOOK_APP_ID,
       clientSecret: FACEBOOK_APP_SECRET,
-      // callbackURL: "/auth/facebook/callback",
+      //callbackURL: "/auth/facebook/callback",
       callbackURL: "https://file-api-sadek.herokuapp.com/auth/facebook/callback"
     },
     function (accessToken, refreshToken, profile, done) {
-      // console.log(profile);
+      console.log(profile);
        User.findOne({userId: profile.id}).then((currentUser) => {
         if(currentUser){
           console.log(currentUser.userId)
@@ -124,7 +124,7 @@ passport.use(
             const data = {
               username: profile.displayName,
               userId: profile.id,
-              thumbnail: profile.photos[0].value,
+              //thumbnail: profile.photos[0].value,
               date: Date.now(),
               type: "Oauth"
             }
