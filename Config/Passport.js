@@ -125,7 +125,7 @@ passport.use(
             const data = {
               username: profile.displayName,
               userId: profile.id,
-              //thumbnail: profile.photos[0].value,
+              thumbnail: profile.photos[0].value,
               date: Date.now(),
               type: "Oauth"
             }
