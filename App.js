@@ -1,17 +1,35 @@
-const cookieSession = require("cookie-session");
+const cookieSession = require('cookie-session');
 const express = require("express");
 const cors = require("cors");
 const passportSetup = require("./Config/Passport");
-const passport = require("passport");
+const passport = require("passport"); // passport 5
 const authRoute = require("./Routes/Auth.route");
 const app = express();
 const mongoose = require('mongoose');
+
 require('dotenv').config()
 
-app.use(passport.initialize());
 
-app.use(cors())
- 
+app.use(
+  cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
+);
+
+
+// initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+var whitelist = ['http://localhost:3000', 'https://passport-fronend-react.vercel.app']
+var corsOptionsDelegate = function (req, callback) {
+  var corsOptions;
+  if (whitelist.indexOf(req.header('Origin')) !== -1) {
+    corsOptions = { origin: true, credentials: true, } // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false, credentials: false, } // disable CORS for this request
+  }
+  callback(null, corsOptions) // callback expects two parameters: error and options
+}
+app.use( cors(corsOptionsDelegate))
 
 app.use("/auth", authRoute);
 
