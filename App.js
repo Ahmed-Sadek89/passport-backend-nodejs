@@ -12,9 +12,7 @@ require('dotenv').config()
 
 app.use(
   cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100,
-  cookie: {
-    secure: true
-  }
+  
 })
 );
 
@@ -22,6 +20,7 @@ app.use(
 // initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
+console.log('app.js ', passport.session());
 
 var whitelist = ['http://localhost:3000', 'https://passport-fronend-react.vercel.app']
 var corsOptionsDelegate = function (req, callback) {
