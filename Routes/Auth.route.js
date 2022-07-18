@@ -37,9 +37,12 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     successRedirect: CLIENT_URL,
-    failureRedirect: "/login/failed",
-  })
-);
+    failureRedirect: "/login/failed", session: true 
+  }),
+    function (req, res) {
+      res.redirect(CLIENT_URL);
+    });
+
 
 router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
 

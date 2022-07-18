@@ -1,4 +1,5 @@
 const cookieSession = require('cookie-session');
+const session = require('express-session');
 const express = require("express");
 const cors = require("cors");
 const passportSetup = require("./Config/Passport");
@@ -10,12 +11,25 @@ const mongoose = require('mongoose');
 require('dotenv').config()
 
 
-app.use(
-  cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100,
+// app.use(
+//   cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100,
   
-})
-);
+// })
+// );
+app.use(express.json())
+app.set("trust proxy", 1);
 
+app.use(
+  session({
+    secret: "secretcode",
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      sameSite: "none",
+      secure: true,
+      maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
+    }
+  }))
 
 // initialize passport
 app.use(passport.initialize());
