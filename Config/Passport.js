@@ -103,7 +103,8 @@ passport.use(
       clientID: FACEBOOK_APP_ID,
       clientSecret: FACEBOOK_APP_SECRET,
       //callbackURL: "/auth/facebook/callback",
-      callbackURL: "https://file-api-sadek.herokuapp.com/auth/facebook/callback"
+      callbackURL: "https://file-api-sadek.herokuapp.com/auth/facebook/callback",
+      profileFields: ['id', 'displayName', 'photos', 'email']
     },
     function (accessToken, refreshToken, profile, done) {
       console.log(profile);
