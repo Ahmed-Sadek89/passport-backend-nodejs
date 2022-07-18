@@ -6,7 +6,7 @@ const CLIENT_URL = "https://passport-fronend-react.vercel.app/";
 
 router.get("/login/success", async (req, res) => {
   const user = await User.find().sort({date: -1}).limit(1)
-  console.log(req._passport)
+  console.log(req.user)
   res.status(200).json({
     success: true,
     message: "successfull",
