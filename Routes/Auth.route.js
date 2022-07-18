@@ -1,19 +1,16 @@
 const router = require("express").Router();
 const passport = require("passport");
-const User = require('../Model/User.model')
 
 const CLIENT_URL = "https://passport-fronend-react.vercel.app/";
 
-router.get("/login/success", async (req, res) => {
-  const user = await User.find().sort({date: -1}).limit(1)
+router.get("/login/success", (req, res) => {
   console.log(req.user)
   console.log('auth.js ', req.session);
   res.status(200).json({
     success: true,
     message: "successfull",
-    user: user,
-    user2: req.user,
-    //   cookies: req.cookies
+    user: req.user,
+    session: req.session
   });
   
 });
@@ -25,8 +22,8 @@ router.get("/login/failed", (req, res) => {
   });
 });
 
-router.get("/logout", async (req, res) => {
-  await User.deleteMany({})
+router.get("/logout", (req, res) => {
+  
   req.logout();
   res.redirect(CLIENT_URL);
 });
@@ -37,11 +34,13 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     successRedirect: CLIENT_URL,
-    failureRedirect: "/login/failed", session: true 
+    failureRedirect: "/login/failed", 
+    session: true 
   }),
-    function (req, res) {
-      res.redirect(CLIENT_URL);
-    });
+  function (req, res) {
+    res.redirect(CLIENT_URL);
+  }
+);
 
 
 router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
@@ -50,8 +49,12 @@ router.get(
   "/github/callback",
   passport.authenticate("github", {
     successRedirect: CLIENT_URL,
-    failureRedirect: "/login/failed",
-  })
+    failureRedirect: "/login/failed", 
+    session: true 
+  }),
+  function (req, res) {
+    res.redirect(CLIENT_URL);
+  }
 );
 
 router.get("/facebook", passport.authenticate("facebook"));
@@ -61,7 +64,11 @@ router.get(
   passport.authenticate("facebook", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed",
-  })
+    session: true 
+  }),
+  function (req, res) {
+    res.redirect(CLIENT_URL);
+  }
 );
 
 

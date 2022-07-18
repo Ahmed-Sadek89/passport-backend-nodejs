@@ -14,8 +14,6 @@ const GITHUB_CLIENT_SECRET=process.env.GITHUB_CLIENT_SECRET
 const FACEBOOK_APP_ID=process.env.FACEBOOK_APP_ID
 const FACEBOOK_APP_SECRET=process.env.FACEBOOK_APP_SECRET
 
-// THIS User MODEL IS FOR GETTING THE CURRENT AUTH USER
-// MAKE A NEW MODEL IF YOU WANT GETTING ALL USERS
 
 passport.use(
   new GoogleStrategy(
@@ -27,19 +25,32 @@ passport.use(
     },
     function (accessToken, refreshToken, profile, done) {
       // console.log(profile);
-      User.deleteMany({}).then(() => {
-        const data = {
-          username: profile.displayName,
-          userId: profile.id,
-          thumbnail: profile.photos[0].value,
-          date: Date.now(),
-          type: "Oauth"
+       User.findOne({userId: profile.id}).then((currentUser) => {
+        if(currentUser){
+          // already have this user
+          return User.updateOne({userId: currentUser.userId}, {
+            $set: {
+              date: Date.now()
+            }
+          }).then(() => {
+              console.log('get the regesterd user at ', Date.now() );
+              done(null, currentUser);
+            })
+        } else {
+            // if not, create user in our db
+            const data = {
+              username: profile.displayName,
+              userId: profile.id,
+              thumbnail: profile.photos[0].value,
+              date: Date.now(),
+              type: "Oauth"
+            }
+             new User(data).save().then((newUser) => {
+                console.log('created new user at ', Date.now());
+                done(null, newUser);
+            });
         }
-        new User(data).save().then((newUser) => {
-          console.log('created new user at ', Date.now());
-          done(null, newUser);
-        });
-      })
+    });
     }
   )
 );
@@ -56,13 +67,12 @@ passport.use(
       // console.log(profile);
        User.findOne({userId: profile.id}).then((currentUser) => {
         if(currentUser){
-          console.log(currentUser.userId)
-            // already have this user
-             return User.updateOne({userId: currentUser.userId}, {
-              $set: {
-                date: Date.now()
-              }
-            }).then(() => {
+          // already have this user
+          return User.updateOne({userId: currentUser.userId}, {
+            $set: {
+              date: Date.now()
+            }
+          }).then(() => {
               console.log('get the regesterd user at ', Date.now() );
               done(null, currentUser);
             })
@@ -90,21 +100,20 @@ passport.use(
     {
       clientID: FACEBOOK_APP_ID,
       clientSecret: FACEBOOK_APP_SECRET,
-      //callbackURL: "/auth/facebook/callback",
+      // callbackURL: "/auth/facebook/callback",
       callbackURL: "https://file-api-sadek.herokuapp.com/auth/facebook/callback",
       profileFields: ['id', 'displayName', 'photos', 'email']
     },
     function (accessToken, refreshToken, profile, done) {
-      console.log(profile);
+      // console.log(profile);
        User.findOne({userId: profile.id}).then((currentUser) => {
         if(currentUser){
-          console.log(currentUser.userId)
-            // already have this user
-             return User.updateOne({userId: currentUser.userId}, {
-              $set: {
-                date: Date.now()
-              }
-            }).then(() => {
+          // already have this user
+          return User.updateOne({userId: currentUser.userId}, {
+            $set: {
+              date: Date.now()
+            }
+          }).then(() => {
               console.log('get the regesterd user at ', Date.now() );
               done(null, currentUser);
             })
