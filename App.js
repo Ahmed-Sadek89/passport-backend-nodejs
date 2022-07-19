@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 require('dotenv').config()
 
 app.use(express.json())
-app.set("trust proxy", 1);
+// app.set("trust proxy", 1);
 
 app.use(
   session({
