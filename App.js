@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 
 require('dotenv').config()
 
-app.use(express.json())
+// app.use(express.json())
 app.set("trust proxy", 1);
 
 app.use(
@@ -17,7 +17,7 @@ app.use(
     secret: "secretcode",
     resave: true,
     saveUninitialized: true,
-    cookie: {
+    cookie: { // for HTTPS
       sameSite: "none",
       secure: true,
       maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
