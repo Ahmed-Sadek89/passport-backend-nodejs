@@ -21,7 +21,7 @@ passport.use(
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
       //callbackURL: "/auth/google/callback",
-      callbackURL: "https://file-api-sadek.herokuapp.com/auth/google/callback"
+      callbackURL: "https://simple-passportjs-app.onrender.com/auth/google/callback"
     },
     function (accessToken, refreshToken, profile, done) {
       // console.log(profile);
@@ -61,7 +61,7 @@ passport.use(
       clientID: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
       // callbackURL: "/auth/github/callback",
-      callbackURL: "https://file-api-sadek.herokuapp.com/auth/github/callback"
+      callbackURL: "https://simple-passportjs-app.onrender.com/auth/github/callback"
     },
     function (accessToken, refreshToken, profile, done) {
       // console.log(profile);
@@ -101,7 +101,7 @@ passport.use(
       clientID: FACEBOOK_APP_ID,
       clientSecret: FACEBOOK_APP_SECRET,
       // callbackURL: "/auth/facebook/callback",
-      callbackURL: "https://file-api-sadek.herokuapp.com/auth/facebook/callback",
+      callbackURL: "https://simple-passportjs-app.onrender.com/auth/facebook/callback",
       profileFields: ['id', 'displayName', 'photos', 'email']
     },
     function (accessToken, refreshToken, profile, done) {
